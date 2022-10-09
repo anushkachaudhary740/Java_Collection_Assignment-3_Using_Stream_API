@@ -15,14 +15,14 @@ public class getNameOfCustomer {
         this.customerArrayList=studentArrayList;
     }
 
-    public  Map<String,Integer> findProductNameAndPrice() {
-        Map<String, Integer> myMap = customerArrayList.stream()
+    public  Map<String,Integer> findProductNameAndMaxPrice() {
+        Map<String, Integer> myMaxMap = customerArrayList.stream()
                 .collect(Collectors
                         .groupingBy(Customer::getProductName, Collectors
                                 .collectingAndThen(Collectors
                                         .maxBy(Comparator.comparingInt(Customer::getPrice)), e->e.map(Customer::getPrice).orElse((int) -1))));
 
-        return myMap;
+        return myMaxMap;
     }
     public  Map<String,Integer> findProductNameAndLowPrice() {
         Map<String, Integer> myminMap = customerArrayList.stream()
@@ -32,9 +32,9 @@ public class getNameOfCustomer {
                                         .minBy(Comparator.comparingInt(Customer::getPrice)), e->e.map(Customer::getPrice).orElse((int) -1))));
         return myminMap;
     }
-    public void customerName(List<Customer>customerArrayList,Map<String,Integer>myMap,Map<String,Integer>myminMap){
+    public void findCustomerName(List<Customer>customerArrayList, Map<String,Integer>myMaxMap, Map<String,Integer>myminMap){
         List<String>set=customerArrayList.stream().filter(
-                value->myMap.containsKey(value.getProductName()) && value.getPrice() < myMap.get(value.getProductName()) && value.getPrice()==myminMap.get(value.getProductName())).map(Customer::getCustomerName).collect(Collectors.toList());
+                value->myMaxMap.containsKey(value.getProductName()) && value.getPrice() < myMaxMap.get(value.getProductName()) && value.getPrice()==myminMap.get(value.getProductName())).map(Customer::getCustomerName).collect(Collectors.toList());
         for(String s:set)
         {
             System.out.println(s);

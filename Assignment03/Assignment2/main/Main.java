@@ -12,9 +12,9 @@ public class Main {
             String filePath = "/home/anushkac/Downloads/Java Traning/src/corejava/collection/assignment02/Assignment2/inputfile/fileinput.csv";
             List<Customer> customerArrayList = inputParser.parseCSvFile(filePath);
             getNameOfCustomer om = new getNameOfCustomer(customerArrayList);
-            Map myMap = om.findProductNameAndPrice();
+            Map myMaxMap = om.findProductNameAndMaxPrice();
             Map myMinMap=om.findProductNameAndLowPrice();
-            om.customerName(customerArrayList,myMap,myMinMap);
+            om.findCustomerName(customerArrayList,myMaxMap,myMinMap);
         }catch(Exception e){
             throw new RuntimeException(e);
         }
